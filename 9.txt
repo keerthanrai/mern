@@ -1,0 +1,41 @@
+Steps
+1. Open your USN folder/9th_prog in Vs Code
+2. Open terminal and write following command
+a. npx create-react-app search-filter {app_name}
+b. cd search-filter
+3. Replace the code in “src/App.js” with the script given below.
+4. To run the program type the command
+    a. npm start
+
+import React, {useState} from 'react';
+const items = ['Apple','Banana','Cherry','Dragonfruit','Mango','Orange','Grape'];
+function App() {
+const [query, setQuery] = useState('');
+const handleInputChange = (event) => {
+setQuery(event.target.value);
+};
+const filteredItems = items.filter((item) =>
+item.toLowerCase().includes(query.toLowerCase())
+);
+return (
+<div style={{ padding: '20px' }}>
+<h1>Search Filter</h1>
+<input
+type="text"
+placeholder="Search..."
+value={query}
+onChange={handleInputChange}
+style={{ padding: '10px', fontSize: '16px', width: '300px' }}
+/>
+<ul>
+{filteredItems.map((item, index) => (
+<li key={index} style={{ listStyle: 'none', padding: '5px 0' }}>
+{item}
+</li>
+))}
+</ul>
+</div>
+
+);
+}
+export default App;

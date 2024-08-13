@@ -1,0 +1,43 @@
+use Database_Name(Give your usn_2ndprog)
+• Syntax:
+db.createCollection("Collection_name")
+Create a collection named Customers
+• db.createCollection(“customers”)
+Insert 3-4 values to the collection
+• db.customers.insertMany([
+{
+"Name": "Somu",
+"Payment": { "Total": 600 },
+"Transaction": { "price": 450 }
+},
+{
+"Name": "Ravi",
+"Payment": { "Total": 300 },
+"Transaction": { "price": 350 }
+},
+{
+"Name": "John",
+"Payment": { "Total": 200 },
+"Transaction": { "price": 150 }
+},
+{
+"Name": "Sara",
+"Payment": { "Total": 700 },
+"Transaction": { "price": 400 }
+},
+{
+"Name": "Nina",
+"Payment": { "Total": 600 },
+"Transaction": { "price": 500 }
+}
+])
+
+
+db.customers.find({ "Name": "Somu" })
+
+db.customers.find({ "Payment.Total": 600 })
+
+db.customers.find({ "Transaction.price": { $gte: 300, $lte: 500 } }
+
+db.customers.aggregate([
+{ $group: { _id: null, totalTransactionAmount: { $sum: "$Payment.Total" } } }])

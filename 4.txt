@@ -1,0 +1,68 @@
+const { MongoClient } = require('mongodb');
+
+const url = 'mongodb://localhost:27017';
+
+const dbName = 'school';
+
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+async function main() {
+try {
+
+await client.connect();
+console.log("Connected successfully to server");
+
+const db = client.db(dbName);
+
+const collection = db.collection('students');
+
+const studentData = {
+usn: '1MS20CS001',
+name: 'John Doe',
+sem: 6,
+year_of_admission: 2020
+};
+const insertResult = await collection.insertOne(studentData);
+console.log('Inserted document:', insertResult.ops);
+} catch (err) {
+console.error(err);
+} finally {
+
+await client.close();
+}
+}
+
+main().catch(console.error);
+
+//Searching script
+
+const { MongoClient } = require('mongodb');
+
+const url = 'mongodb://localhost:27017';
+
+const dbName = 'school';
+
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+async function searchStudentsByName(partialName) {
+try {
+
+await client.connect();
+console.log("Connected successfully to server");
+
+const db = client.db(dbName);
+const collection = db.collection('students');
+
+const regex = new RegExp(partialName, 'i');
+
+const results = await collection.find({ name: regex }).toArray();
+
+console.log('Search results:', results);
+} catch (err) {
+console.error('Error occurred:', err);
+} finally {
+
+await client.close();
+}
+}
+
+const partialName = 'John'; // Change this to test other partial names
+searchStudentsByName(partialName).catch(console.error);

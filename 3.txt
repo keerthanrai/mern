@@ -1,0 +1,47 @@
+const express = require('express'); 
+const cookieParser = require('cookie-parser'); 
+
+
+
+const app = express(); //instance of express appl
+const port = 3000; //setting the app in port 3000
+
+
+app.use(cookieParser()); 
+
+
+app.get('/', (req, res) => {
+console.log('Cookies:', req.cookies); 
+res.send('Check the console for cookies.'); 
+});
+
+
+app.listen(port, () => {
+console.log(`Server running at http://localhost:${port}`);
+});
+
+
+//node.js
+
+const car = {
+brand: ‘lamborghini’,
+model: ‘Sian’,
+year: 2020,
+color: 'red'
+};
+
+
+console.log('Car properties:', car);
+
+
+const keys = Object.keys(car);
+if (keys.length > 1) {
+delete car[keys[1]];
+}
+
+
+console.log('Car properties after deletion:', car);
+
+
+const length = Object.keys(car).length;
+console.log('Number of properties in the car object:', length);

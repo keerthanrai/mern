@@ -1,0 +1,60 @@
+//step-1 Open your USN folder in VS Code → Create a new folder called 
+
+(5th_prog) → Open terminal in VS Code
+
+npm init -y
+npm install fs
+
+
+
+//sep-2script.js
+const fs = require('fs'); 
+const path = './data'; 
+
+if (!fs.existsSync(path)) {
+fs.mkdirSync(path);
+}
+
+const createFile = (filename, content) => {
+fs.writeFile(`${path}/${filename}`, content, (err) => {
+if (err) console.error('Error creating file:', err);
+else console.log('File created:', filename);
+});
+};
+
+
+const readFile = (filename) => {
+fs.readFile(`${path}/${filename}`, 'utf8', (err, data) => {
+if (err) console.error('Error reading file:', err);
+else console.log('File content:', data);
+});
+};
+
+const updateFile = (filename, content) => {
+fs.writeFile(`${path}/${filename}`, content, (err) => {
+if (err) console.error('Error updating file:', err);
+else console.log('File updated:', filename);
+});
+};
+
+const deleteFile = (filename) => {
+fs.unlink(`${path}/${filename}`, (err) => {
+if (err) console.error('Error deleting file:', err);
+else console.log('File deleted:', filename);
+});
+};
+
+const filename = 'sample.txt';
+
+
+createFile(filename, "Sample file created using node js");
+
+readFile(filename);
+
+
+updateFile(filename, 'Sample file is updated using node js');
+
+deleteFile(filename)
+
+//step-3 using terminal
+node script.js

@@ -1,0 +1,30 @@
+[
+{
+"_id": 1,
+"item": "book",
+"price": 10
+},
+{
+"_id": 2,
+"item": "pen",
+"price": 2
+},
+{
+"_id": 3,
+"item": "notebook",
+"price": 5
+}
+]
+
+
+
+mongoimport --db usermanaged --collection transactions --file transactions.json --
+jsonArray –drop
+
+
+//Open a new terminal in command prompt
+mongosh → show dbs → use database_name → show collections → db.collection_name.find()
+
+//transactions_upsert.json
+mongoimport --db usermanaged --collection transactions --file transactions_upsert.json --
+jsonArray –upsert
