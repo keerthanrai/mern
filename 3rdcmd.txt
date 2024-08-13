@@ -1,0 +1,6 @@
+for output in terminal
+
+npm install express cookie-parser axios
+
+
+node app.js
