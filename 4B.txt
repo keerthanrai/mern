@@ -1,0 +1,46 @@
+const { MongoClient } = require('mongodb');
+// Connection URL
+const url = 'mongodb://localhost:27017';
+// Database Name
+const dbName = 'school';
+// Create a new MongoClient
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+async function main() {
+try {
+// Connect the client to the server
+await client.connect();
+console.log("Connected successfully to server");
+// Specify the database to use
+const db = client.db(dbName);
+// Specify the collection to use
+const collection = db.collection('students');
+// Student data to be inserted
+const studentData = {
+usn: '1MS20CS001',
+name: 'John Doe',
+sem: 6,
+year_of_admission: 2020
+};
+// Insert the student data into the collection
+const insertResult = await collection.insertOne(studentData);
+console.log('Inserted document:', insertResult.ops);
+
+// Function to search for names based on a partial match
+async function searchStudentsByName(partialName) {
+const regex = new RegExp(partialName, 'i'); // Create a case-insensitive regex
+const results = await collection.find({ name: regex }).toArray();
+return results;
+}
+// Example search
+const partialName = 'ABC'; // Change this to test other partial names
+const searchResults = await searchStudentsByName(partialName);
+console.log('Search results:', searchResults);
+} catch (err) {
+console.error('Error occurred:', err);
+} finally {
+// Close the connection
+await client.close();
+}
+}
+// Run the main function
+main().catch(console.error);
